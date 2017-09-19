@@ -8,10 +8,10 @@ class PlayersController < ApplicationController
   end
 
   # POST /players
-  def create
-    @player = Player.create!(player_params)
-    json_response(@player, :created)
-  end
+  # def create
+  #   @player = Player.create!(player_params)
+  #   json_response(@player, :created)
+  # end
 
   # GET /players/:id
   def show
@@ -25,17 +25,17 @@ class PlayersController < ApplicationController
   end
 
   # DELETE /players/:id
-  def destroy
-    @player.destroy
-    head :no_content
-  end
+  # def destroy
+  #   @player.destroy
+  #   head :no_content
+  # end
 
   private
 
-  def player_params
-    # whitelist params
-    params.permit( :first_name, :last_name, :email, :encrypted_password, :phone, :gender, :points, :coach_id, :age)
-  end
+  # def player_params
+  #   # whitelist params
+  #   params.permit( :first_name, :last_name, :email, :password, :password_confirmation, :phone, :gender, :points, :coach_id, :age, :age_range)
+  # end
 
   def set_player
     @player = Player.find(params[:id])
