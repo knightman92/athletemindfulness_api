@@ -3,7 +3,15 @@ class QuestionsController < ApplicationController
 
   # GET /questions
   def index
-    @questions = Question.all
+    if params[:question_type] != nil and params[:category] != nil
+      @questions = Question.where("question_type = ? AND category = ?", params[:question_type], params[:category])
+    elsif params[:question_type] != nil
+      @questions = Question.where("question_type = ?", params[:question_type])
+    elsif params[:category] != nil
+      @questions = Question.where("category = ?", params[:category])
+    else
+      @questions = Question.all
+    end
     json_response(@questions)
   end
 
