@@ -3,8 +3,10 @@ Rails.application.routes.draw do
 
   root to: "questions#index"
 
-  devise_for :players, path: 'players', controllers: { sessions: "players/sessions", registrations: "players/registrations" }
-  devise_for :coaches, path: 'coaches', controllers: { sessions: "coaches/sessions", registrations: "coaches/registrations" }
+  devise_for :players, path: 'players', controllers: { sessions: "players/sessions", registrations: "players/registrations" }, defaults: { format: :json}
+  devise_for :coaches, path: 'coaches', controllers: { sessions: "coaches/sessions", registrations: "coaches/registrations" }, defaults: { format: :json}
+
+  post '/multiple_answers', to: 'multiple_answers#create_multiple'
 
   resources :leaderboard
 
