@@ -1,6 +1,8 @@
 class PlayersController < ApplicationController
 	before_action :set_player, only: [:show, :update, :destroy]
-  before_action :authenticate_player!, only: [:update, :destroy]
+  before_action :authenticate_player_with_token!, only: [:create, :show, :update, :destroy]
+
+
 
   # GET /players
   def index

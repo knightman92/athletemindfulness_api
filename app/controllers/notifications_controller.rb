@@ -3,7 +3,11 @@ class NotificationsController < ApplicationController
 
   # GET /notifications
   def index
-    if params[:question_id] != nil
+    if params[:question_id] != nil and params[:category] != nil
+      @notifications = Notification.where("question_id = ? AND category = ?", params[:question_id], params[:category])
+    elsif params[:category] != nil
+      @notifications = Notification.where("category = ?", params[:category])
+    elsif params[:question_id] != nil
       @notifications = Notification.where("question_id = ?", params[:question_id])
     else
       @notifications = Notification.all

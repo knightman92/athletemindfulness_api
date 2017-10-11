@@ -17,6 +17,7 @@ class AnswersController < ApplicationController
 
   # POST /answers
   def create
+    puts params 
     @answer = Answer.create!(answer_params)
     json_response(@answer, :created)
   end

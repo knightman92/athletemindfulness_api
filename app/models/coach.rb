@@ -3,7 +3,11 @@ class Coach < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :validatable,
+         :authentication_keys => [:login]
+	
+  attr_accessor :login
+
 	# model association 
 	has_many :players
 	has_many :questions
@@ -14,4 +18,11 @@ class Coach < ApplicationRecord
 	validates_uniqueness_of :email, :message => "Email already taken"
 	validates_presence_of :encrypted_password
 	validates_presence_of :phone
+
+	def generate_authentication_token!
+    begin
+        self.auth_token = Devise.friendly_token
+    end while self.class.exists?(auth_token: auth_token)
+	end
+	
 end

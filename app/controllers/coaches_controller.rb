@@ -1,6 +1,7 @@
 class CoachesController < ApplicationController
   before_action :set_coach, only: [:show, :update, :destroy]
-  before_action :authenticate_coach!
+  before_action :authenticate_coach_with_token!, only: [:create, :show, :update, :destroy]
+  
   # GET /coaches
   def index
     @coaches = Coach.all.order('first_name asc')
@@ -40,4 +41,5 @@ class CoachesController < ApplicationController
   def set_coach
     @coach = Coach.find(params[:id])
   end
+
 end
